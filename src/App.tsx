@@ -14,6 +14,9 @@ const App: React.FC = () => {
             <Route exact path={route.path} component={route.component} key={index} />
           )
         })}
+        <Route exact path="/">
+          <h1 style={{ textAlign: 'center' }}>Choose the type of chart</h1>
+        </Route>
       </Switch>
     </>
   )
