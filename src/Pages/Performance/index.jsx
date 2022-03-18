@@ -5,23 +5,43 @@ import Chart from "../../Shared/ChartWrapper";
 import { data, colors, categories } from "./data";
 
 const Performance = () => {
+  const tickLabels = ["Low", "Medium", "High", "Verkkkkkkky High"];
+
   return (
     <>
       <h1 style={{ textAlign: "center" }}>Performance over time</h1>
       <Chart>
         <V.VictoryChart
           domainPadding={{ x: [10, 10], y: 20 }}
-          padding={{ top: 0, bottom: 100, left: 90, right: 0 }}
+          padding={{
+            top: 0,
+            bottom: 100,
+            left: tickLabels.some((el) => el.length > 10) ? 100 : 90,
+            right: 0,
+          }}
         >
           <V.VictoryAxis
             dependentAxis
             axisLabelComponent={<V.VictoryLabel dy={-55} />}
             tickFormat={(t) => {
-              if (t === 20) return "Low";
-              else if (t === 40) return "Medium";
-              else if (t === 60) return "High";
-              else return "Very High";
+              if (t === 20) return tickLabels[0];
+              else if (t === 40) return tickLabels[1];
+              else if (t === 60) return tickLabels[2];
+              else return tickLabels[3];
             }}
+            tickLabelComponent={
+              <V.VictoryLabel
+                style={{
+                  fontSize: tickLabels.some((el) => el.length > 10)
+                    ? 12
+                    : tickLabels.some((el) => el.length > 12)
+                    ? 10
+                    : 14,
+                }}
+                dy={20}
+                dx={tickLabels.some((el) => el.length > 14) ? 20 : 15}
+              />
+            }
             label={"Performance"}
             style={{
               axisLabel: {
